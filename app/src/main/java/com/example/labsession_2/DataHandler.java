@@ -2,6 +2,7 @@ package com.example.labsession_2;
 
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,18 +38,19 @@ public class DataHandler
             }
             if (current == InputTypes.POINT)
             {
-                if ( i + 1 < instructions.size() - 1)
+                if ( i + 1 < instructions.size())
                 {
                     if (!number(instructions.get(i + 1)))
                         return false; // syntax error from the user
                 }
             }
         }
-
+        Log.i("DEBUG", "No Syntax Errors");
         // if this far then should all be in the correct fashion IE number operator number oprtator ...
 
         List<String> finalCalculation = new ArrayList<String>();
         String part = "";
+        boolean containsPoint = false;
 
         // convert from a list to actual things
         for (int i = 0; i < instructions.size(); i++)
@@ -67,26 +69,40 @@ public class DataHandler
             }
 
             if (current == InputTypes.POINT)
+            {
+                if (containsPoint)
+                    return false;
                 part += convertTypeToString(current);
+                containsPoint = true;
+                continue;
+            }
 
             if (number(current))
             {
                 part += convertTypeToString(current);
 
-                if (i != instructions.size() - 1)
+                if (i + 1 < instructions.size())
                 {
                     InputTypes next =  instructions.get(i + 1);
-                    if (!number(next))
+                    if (!number(next) && next != InputTypes.POINT)
                     {
                         finalCalculation.add(part);
                         part = "";
+                        containsPoint = false;
                     }
+                }
+                else
+                {
+                    finalCalculation.add(part);
+                    part = "";
+                    containsPoint = false;
                 }
                 continue;
             }
 
             finalCalculation.add(convertTypeToString(current));
         }
+        Log.i("DEBUG", "final Calculation: " + finalCalculation);
 
         // at this point should have a list which consists of all of the numbers and operators and all
         // i have to do is loop though it and calculate the output
@@ -145,6 +161,7 @@ public class DataHandler
                 type == InputTypes.SEVEN ||
                 type == InputTypes.EIGHT ||
                 type == InputTypes.NINE ||
+                type == InputTypes.ZERO ||
                 type == InputTypes.ANS)
             return true;
         return false;

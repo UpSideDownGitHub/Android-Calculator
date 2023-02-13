@@ -65,11 +65,13 @@ public class Calculator
     {
         TextView text = currentview.findViewById(R.id.sum_text);
         text.setText(error);
+        dataHandler.removeAll(instructions);
     }
     public void showAnswer(double value)
     {
         TextView text = currentview.findViewById(R.id.sum_text);
         text.setText("= " + Double.toString(value));
+        dataHandler.removeAll(instructions);
     }
 
     public void updateText()

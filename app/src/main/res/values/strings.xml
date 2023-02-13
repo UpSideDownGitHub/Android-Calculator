@@ -7,7 +7,7 @@
     // bottom line
     <string name="calc_0">0</string>
     <string name="calc_point">.</string>
-    <string name="calc_root">√</string>
+    <string name="calc_root"> </string>
     <string name="calc_ans">Ans</string>
     <string name="calc_equals">=</string>
 

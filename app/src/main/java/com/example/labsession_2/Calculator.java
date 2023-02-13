@@ -1,117 +1,83 @@
 package com.example.labsession_2;
 
-import android.animation.IntArrayEvaluator;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import java.security.spec.ECField;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator
 {
-    private String num1;
-    private String num2;
-    private String operator;
-    private boolean hadOperator;
-    private boolean equalsPressed;
+    // PUBLIC
 
+    // PRIVATE
+    private View currentview;
     private String currentText;
 
-    public View currentview;
+    private DataHandler dataHandler;
 
-    public void addInstruction(String instruction)
-    {
+    // instruction list
+    private List<InputTypes> instructions = new ArrayList<InputTypes>();
 
-    }
 
     public Calculator(View view)
     {
         currentview = view;
-        clear();
+        dataHandler = new DataHandler();
     }
 
-    public void updateCurrentText()
-    {
-        currentText = "";
-        if (!num1.isEmpty()) {
-            currentText += num1;
-            if (!operator.isEmpty()) {
-                currentText += operator;
-                if (!num2.isEmpty())
-                    currentText += num2;
-            }
-        }
+    public void addInstruction(InputTypes type) {
+        // some instructions should not be added
 
-        TextView sumLine = currentview.findViewById(R.id.sum_text);
-        sumLine.setText(currentText);
-    }
-    public void showFinalCalculation()
-    {
-        equalsPressed = true;
-        TextView sumLine = currentview.findViewById(R.id.sum_text);
-        sumLine.setText(currentText);
-    }
-
-    public void addNumber(String sentNumber)
-    {
-        if (hadOperator)
-            num2 += sentNumber;
-        else
-            num1 += sentNumber;
-
-        updateCurrentText();
-    }
-
-    public void addOperator(String sentOperator)
-    {
-        if (hadOperator || num1.isEmpty())
-            return;
-        operator = sentOperator;
-        updateCurrentText();
-        hadOperator = true;
-    }
-
-    public void equals()
-    {
-        if (num1.isEmpty() || num2.isEmpty() || !hadOperator)
-            return;
-
-        long prefix = 0;
-        long postfix = 0;
-        try
+        if (type == InputTypes.EQUALS)
         {
-            prefix = Long.parseLong(num1);
-            postfix = Long.parseLong(num2);
+            // work out the given sum
+            boolean done = dataHandler.calculateInstructions(instructions);
+            if (done)
+                showAnswer(dataHandler.currentAnswer);
+            else
+                showError("Syntax Error");
+            return;
         }
-        catch (Exception e)
+        else if (type == InputTypes.DEL)
         {
-            clear();
-            currentText = "ERROR TO LONG";
-            showFinalCalculation();
+            // remove the last instruction
+            dataHandler.removeLast(instructions);
+            updateText();
+            return;
+        }
+        else if (type == InputTypes.AC)
+        {
+            // remove all instructions
+            dataHandler.removeAll(instructions);
+            updateText();
             return;
         }
 
-        long output = 0;
-        if (operator.compareTo("+") == 0)
-        {
-            output = prefix + postfix;
-        }
-        else
-        {
-            output = prefix - postfix;
-        }
+        // add the instruction to the list of instructions
+        instructions.add(type);
 
-        clear();
-        currentText = "= " + output;
-        showFinalCalculation();
+        // update the text to show the new value
+        updateText();
     }
-    public void clear()
+
+    public void showError(String error)
     {
-        hadOperator = false;
-        currentText = "";
-        num1 = "";
-        num2 = "";
-        operator = "";
-        updateCurrentText();
+        TextView text = currentview.findViewById(R.id.sum_text);
+        text.setText(error);
+    }
+    public void showAnswer(double value)
+    {
+        TextView text = currentview.findViewById(R.id.sum_text);
+        text.setText("= " + Double.toString(value));
+    }
+
+    public void updateText()
+    {
+        // this function is used to show the text on screen
+        String converted = dataHandler.convertToString(instructions);
+
+        TextView text = currentview.findViewById(R.id.sum_text);
+        text.setText(converted);
     }
 }

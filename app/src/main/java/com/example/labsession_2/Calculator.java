@@ -19,6 +19,11 @@ public class Calculator
 
     public View currentview;
 
+    public void addInstruction(String instruction)
+    {
+
+    }
+
     public Calculator(View view)
     {
         currentview = view;

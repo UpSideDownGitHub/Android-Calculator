@@ -38,7 +38,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_point"
         android:text="@string/calc_point"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/zero_button" />
@@ -49,7 +49,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_root"
         android:text="@string/calc_root"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/point_button" />
@@ -60,7 +60,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_equals"
+        android:onClick="btn_ans"
         android:text="@string/calc_ans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/root_button" />
@@ -82,7 +82,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_one"
         android:text="@string/calc_1"
         app:layout_constraintBottom_toTopOf="@+id/zero_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -93,7 +93,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_two"
         android:text="@string/calc_2"
         app:layout_constraintBottom_toTopOf="@+id/point_button"
         app:layout_constraintStart_toEndOf="@+id/one_button" />
@@ -104,7 +104,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_equals"
+        android:onClick="btn_three"
         android:text="@string/calc_3"
         app:layout_constraintBottom_toTopOf="@+id/root_button"
         app:layout_constraintStart_toEndOf="@+id/two_button" />
@@ -115,7 +115,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_equals"
+        android:onClick="btn_plus"
         android:text="@string/calc_plus"
         app:layout_constraintBottom_toTopOf="@+id/ans_button"
         app:layout_constraintStart_toEndOf="@+id/three_button" />
@@ -126,7 +126,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_minus"
         android:text="@string/calc_minus"
         app:layout_constraintBottom_toTopOf="@+id/equals_button"
         app:layout_constraintStart_toEndOf="@+id/plus_button" />
@@ -137,7 +137,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_four"
         android:text="@string/calc_4"
         app:layout_constraintBottom_toTopOf="@+id/one_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -148,7 +148,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_five"
         android:text="@string/calc_5"
         app:layout_constraintBottom_toTopOf="@+id/two_button"
         app:layout_constraintStart_toEndOf="@+id/four_button" />
@@ -159,7 +159,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_equals"
+        android:onClick="btn_six"
         android:text="@string/calc_6"
         app:layout_constraintBottom_toTopOf="@+id/three_button"
         app:layout_constraintStart_toEndOf="@+id/five_button" />
@@ -170,7 +170,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_equals"
+        android:onClick="btn_multiply"
         android:text="@string/calc_multiply"
         app:layout_constraintBottom_toTopOf="@+id/plus_button"
         app:layout_constraintStart_toEndOf="@+id/six_button" />
@@ -181,7 +181,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_divide"
         android:text="@string/calc_divide"
         app:layout_constraintBottom_toTopOf="@+id/minus_button"
         app:layout_constraintStart_toEndOf="@+id/multiply_button" />
@@ -192,7 +192,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_seven"
         android:text="@string/calc_7"
         app:layout_constraintBottom_toTopOf="@id/four_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -203,7 +203,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_eight"
         android:text="@string/calc_8"
         app:layout_constraintBottom_toTopOf="@id/five_button"
         app:layout_constraintStart_toEndOf="@+id/seven_button" />
@@ -214,7 +214,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_nine"
         android:text="@string/calc_9"
         app:layout_constraintBottom_toTopOf="@id/six_button"
         app:layout_constraintStart_toEndOf="@+id/eight_button" />
@@ -225,7 +225,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_del"
         android:text="@string/calc_del"
         app:layout_constraintBottom_toTopOf="@id/multiply_button"
         app:layout_constraintStart_toEndOf="@+id/nine_button" />
@@ -236,7 +236,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:onClick="btn_zero"
+        android:onClick="btn_ac"
         android:text="@string/calc_8"
         app:layout_constraintBottom_toTopOf="@id/divide_button"
         app:layout_constraintStart_toEndOf="@+id/del_button" />

@@ -29,7 +29,7 @@ public class DataHandler
 
             if (i == 0 || !number(previous)) {
                 if (current == InputTypes.MULTIPLY || current == InputTypes.DIVIDE || current == InputTypes.POINT ||
-                    current == InputTypes.PLUS || current == InputTypes.MINUS)
+                    current == InputTypes.PLUS )// || current == InputTypes.MINUS) need to add for minus values
                     return false; // syntax error from user
             }
             if (number(previous)) {
@@ -104,6 +104,54 @@ public class DataHandler
         }
         Log.i("DEBUG", "final Calculation: " + finalCalculation);
 
+        List<String> tempFinalCalculation = new ArrayList<String>();
+
+        // now need to go through the list of items and determine if there are any pre identifiers
+        // on any of the values like -100 - 10 becuase curenltly it does not know of -100
+        for (int i = 0; i < finalCalculation.size(); i++)
+        {
+            String previous = "NOTHING";
+            String next = "NOTHING";
+            if (i != 0)
+                previous = finalCalculation.get(i - 1);
+            if (i + 1 < finalCalculation.size())
+                next = finalCalculation.get(i + 1);
+            String current = finalCalculation.get(i);
+
+            if (current.compareTo("-") == 0)
+            {
+                if (next.compareTo("NOTHING") == 0)
+                    return false; // minus at the end of the line is not allowed
+                if (number(previous) && number(next))
+                {
+                    tempFinalCalculation.add(finalCalculation.get(i)); // add the value as normal
+                    continue; // this is a normal minus and is not directly effecting a value
+                }
+                if (previous.compareTo("-") == 0 && next.compareTo("-") == 0)
+                    return false; // not allowed more than 2 minuses as breaks shit
+                if (!number(previous) && number(next))
+                {
+                    // combine the current and next to form 1 value then skip the next value
+                    tempFinalCalculation.add(finalCalculation.get(i) + finalCalculation.get(i + 1));
+                    i++; // skip next value
+                    continue;
+                }
+                if (previous.compareTo("NOTHING") == 0 && number(next))
+                {
+                    // combine the two as a negative number was given at the start
+                    tempFinalCalculation.add(finalCalculation.get(i) + finalCalculation.get(i + 1));
+                    i++; // skip next value
+                    continue;
+                }
+            }
+            // add the value to the new list as we know is not a negative and so is correct
+            tempFinalCalculation.add(finalCalculation.get(i));
+        }
+        // set the final calcualtion to the fixed value
+        finalCalculation = tempFinalCalculation;
+
+        Log.i("DEBUG", "Fixed Final Calc " + finalCalculation);
+
         // at this point should have a list which consists of all of the numbers and operators and all
         // i have to do is loop though it and calculate the output
 
@@ -165,6 +213,17 @@ public class DataHandler
                 type == InputTypes.ANS)
             return true;
         return false;
+    }
+    public boolean number(String type)
+    {
+        if (type == null)
+            return false;
+        try {
+            Double.parseDouble(type);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public List<InputTypes> removeLast(List<InputTypes> instructions)

@@ -3,7 +3,11 @@ package com.example.labsession_2;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Calculator
@@ -12,6 +16,7 @@ public class Calculator
 
     // PRIVATE
     private View currentview;
+    private Adapter recylerAdapter;
     private String currentText;
 
     private DataHandler dataHandler;
@@ -19,9 +24,9 @@ public class Calculator
     // instruction list
     private List<InputTypes> instructions = new ArrayList<InputTypes>();
 
-
-    public Calculator(View view)
+    public Calculator(View view, Adapter adapter)
     {
+        recylerAdapter = adapter;
         currentview = view;
         dataHandler = new DataHandler();
     }
@@ -70,8 +75,12 @@ public class Calculator
     public void showAnswer(double value)
     {
         TextView text = currentview.findViewById(R.id.sum_text);
-        text.setText("= " + Double.toString(value));
+        // CHANGE THIS LINE TO SET IT TO THE DEFAULT VALUE
+        text.setText(R.string.calc_default);
         dataHandler.removeAll(instructions);
+
+        // need to add this answer to the list of answers then show the next the default text of the thing
+        recylerAdapter.addValue("= " + Double.toString(value));
     }
 
     public void updateText()

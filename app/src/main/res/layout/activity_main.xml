@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/sum_text"
-        android:layout_width="375dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="25dp"
-        android:autoText="true"
-        android:text="@string/calc_default"
-        android:textAlignment="viewEnd"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/zero_button"
         android:layout_width="60dp"
@@ -240,5 +225,31 @@
         android:text="@string/calc_ac"
         app:layout_constraintBottom_toTopOf="@id/divide_button"
         app:layout_constraintStart_toEndOf="@+id/del_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="369dp"
+        android:layout_height="390dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:textAlignment="textEnd"
+        app:barrierDirection="top"
+        app:flow_firstHorizontalStyle="spread_inside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sum_text" />
+
+    <TextView
+        android:id="@+id/sum_text"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/calc_default"
+        android:textAlignment="textEnd"
+        android:textSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,21 +1,48 @@
 package com.example.labsession_2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
 
     public Calculator calculator;
 
+
+    // to show list of old answers
+    RecyclerView recyclerView;
+    Adapter adapter;
+
+    // Using ArrayList to store images data
+    ArrayList courseName = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        calculator = new Calculator(this.getWindow().getDecorView());
+        // Getting reference of recyclerView
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+
+        // Setting the layout as linear
+        // layout for vertical orientation
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        // Sending reference and data to Adapter
+        adapter = new Adapter(MainActivity.this, courseName);
+
+        // Setting Adapter to RecyclerView
+        recyclerView.setAdapter(adapter);
+
+        calculator = new Calculator(this.getWindow().getDecorView(), adapter);
     }
 
 
